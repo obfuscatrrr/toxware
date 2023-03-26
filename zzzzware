@@ -1,0 +1,46 @@
+getgenv().Keyy = Enum.KeyCode.M
+getgenv().HorizontalAA = false  --// Dont touch
+getgenv().HorizontalAAVelocity = -1410
+
+Toggled = true
+
+local Players     = game:GetService("Players")
+local RunService  = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+local Character   = LocalPlayer.Character
+local RootPart    = Character:FindFirstChild("HumanoidRootPart")
+
+game:service('UserInputService').InputBegan:connect(function(a, c)
+    if c then return end 
+        if a.KeyCode == getgenv().Keyy then
+        if Toggled == true then
+            getgenv().HorizontalAA = not getgenv().HorizontalAA
+            if getgenv().HorizontalAA
+            then
+                game.StarterGui:SetCore("SendNotification", {
+                    Title = "Made By zzzz.#2348",
+                    Text = "ON",
+                    Duration = 3
+                    })
+            elseif not getgenv().VelocityChanger 
+            then
+                game.StarterGui:SetCore("SendNotification", {
+                    Title = "Made By zzzz.#2348",
+                    Text = "OFF",
+                    Duration = 3
+                    })
+            end
+            end
+        end
+    end)
+
+game:GetService("RunService").heartbeat:Connect(function()
+    if getgenv().HorizontalAA  then 
+        local velocity = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+        game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(
+        0,0,getgenv().HorizontalAAVelocity
+        ) 
+        game:GetService("RunService").RenderStepped:Wait()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = velocity
+        end 
+end)
